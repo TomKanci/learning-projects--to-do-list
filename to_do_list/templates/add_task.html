@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+<h2 class="header-secondary">Hello here you will add a task</h2>
+<form class="add-task-form" method="POST">
+  {{form.hidden_tag()}}
+  <div class="form-container">{{form.text.label}}{{form.text()}}</div>
+  <div class="form-container">
+    {{form.task_type.label}}{{form.task_type(class="task-type")}}
+  </div>
+  {{form.submit()}}
+</form>
+{% endblock %}
