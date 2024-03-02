@@ -51,6 +51,16 @@ def add_task():
 
 @app.route('/save_order', methods=['POST'])
 def save_order():
-    if request.method == "POST":
-        datafromjs = request.form['mydata']
-        print(datafromjs)
+    group_to_task_type = {
+        'box-today': 'Today',
+        'box-week': 'This week',
+        'box-later': 'Later',
+    }
+    task_order = request.get_json()
+    for group, tasks in task_order.items():
+        for index, task_id in enumerate(tasks,1):
+            task = Task.query.get(task_id)
+            task.my_order = index
+            task.task_type = group_to_task_type[group]
+    db.session.commit()
+    return '', 204

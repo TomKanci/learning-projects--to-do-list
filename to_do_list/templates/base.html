@@ -18,8 +18,7 @@
       <a class="navigation-link" href='{{ url_for("index") }}'>Homepage</a>
       <div class="flex-horizontal--gap2">
         {% if index_page %}
-        <button onclick="runPyScript()">Save order</button>
-        <!-- <a class="navigation-link" href='{{ url_for("index") }}'>Save order</a> -->
+        <button id="save-order-button">Save order</button>
         {% endif %}
         <a class="navigation-link" href='{{ url_for("add_task") }}'
           >Add a task</a

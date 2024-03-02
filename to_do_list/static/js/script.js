@@ -1,3 +1,7 @@
+////////////////////////////////////////////////
+// 1. Drag and Drop
+// taken from https://www.youtube.com/watch?v=jfYWwQrtzzY
+////////////////////////////////////////////////
 const draggables = document.querySelectorAll(".draggable");
 const boxes = document.querySelectorAll(".box");
 
@@ -42,26 +46,32 @@ function getDraggedAfterElement(box, y) {
   ).element;
 }
 
-function printArray() {
-  const myarray = [];
+////////////////////////////////////////////////
+// 2. Save order of tasks
+////////////////////////////////////////////////
 
-  draggables.forEach((draggable, index, array) => {
-    myarray.push(draggable.id);
-  });
-  console.log(myarray);
-}
+document
+  .querySelector("#save-order-button")
+  .addEventListener("click", function () {
+    // Gather the current order of tasks for each group
+    let taskOrder = {
+      "box-today": Array.from(
+        document.querySelectorAll("#box-today .task")
+      ).map((task) => task.id),
+      "box-week": Array.from(document.querySelectorAll("#box-week .task")).map(
+        (task) => task.id
+      ),
+      "box-later": Array.from(
+        document.querySelectorAll("#box-later .task")
+      ).map((task) => task.id),
+    };
 
-function runPyScript() {
-  const myarray = [];
-  draggables.forEach((draggable, index, array) => {
-    myarray.push(draggable.id);
+    // Send this order to the server
+    fetch("/save_order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(taskOrder),
+    });
   });
-  var jqXHR = $.ajax({
-    type: "POST",
-    url: "/save_order",
-    async: false,
-    data: { mydata: myarray },
-  });
-
-  // return jqXHR.responseText;
-}

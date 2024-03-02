@@ -1,39 +1,44 @@
 {% extends "base.html" %} {% block content %}
 <h1 class="header-primary">Your to do list!</h1>
-<div id="box-today" class="box">
-  <h2 class="header-secondary">Today</h2>
-  {% for task in tasks_today_my_order %} {% if task.task_type=="Today" %}
-  <div class="draggable" id="{{task.id}}" draggable="true">{{task.text}}</div>
-  {% endif %} {% endfor %} {% for task in tasks_id %} {% if
-  task.task_type=="Today" %}
-  <div class="draggable" id="{{task.id}}" draggable="true">{{task.text}}</div>
-  {% endif %} {% endfor %}
-</div>
-<div id="box-week" class="box">
-  <h2 class="header-secondary">This week</h2>
-  {% for task in tasks_week_my_order %} {% if task.task_type=="This week" %}
-  <div class="draggable" id="{{task.id}}" draggable="true">{{task.text}}</div>
-  {% endif %} {% endfor %} {% for task in tasks_id %} {% if
-  task.task_type=="This week" %}
-  <div class="draggable" id="{{task.id}}" draggable="true">{{task.text}}</div>
-  {% endif %} {% endfor %}
-</div>
-<div id="box-later" class="box">
-  <h2 class="header-secondary">Later</h2>
-  {% for task in tasks_later_my_order %} {% if task.task_type=="Later" %}
-  <div class="draggable" id="{{task.id}}" draggable="true">{{task.text}}</div>
-  {% endif %} {% endfor %} {% for task in tasks_id %} {% if
-  task.task_type=="Later" %}
-  <div class="draggable" id="{{task.id}}" draggable="true">{{task.text}}</div>
-  {% endif %} {% endfor %}
-  <div class="draggable" draggable="true">
-    <form method="POST">
-      {{check_form.hidden_tag()}} {{check_form.checkbox(onChange =
-      "this.form.submit()")}}
-      <!-- <input type="checkbox" name="Checkbox" id="" /> -->
-    </form>
-    5
+<div class="todo-list-container">
+  <div id="box-today" class="box">
+    <h2 class="header-secondary">Today</h2>
+    {% for task in tasks_today_my_order %} {% if task.task_type=="Today" %}
+    <div class="draggable task" id="{{task.id}}" draggable="true">
+      {{task.text}}
+    </div>
+    {% endif %} {% endfor %} {% for task in tasks_id %} {% if
+    task.task_type=="Today" %}
+    <div class="draggable task" id="{{task.id}}" draggable="true">
+      {{task.text}}
+    </div>
+    {% endif %} {% endfor %}
   </div>
-  <div class="draggable" draggable="true">6</div>
+  <div id="box-week" class="box">
+    <h2 class="header-secondary">This week</h2>
+    {% for task in tasks_week_my_order %} {% if task.task_type=="This week" %}
+    <div class="draggable task" id="{{task.id}}" draggable="true">
+      {{task.text}}
+    </div>
+    {% endif %} {% endfor %} {% for task in tasks_id %} {% if
+    task.task_type=="This week" %}
+    <div class="draggable task" id="{{task.id}}" draggable="true">
+      {{task.text}}
+    </div>
+    {% endif %} {% endfor %}
+  </div>
+  <div id="box-later" class="box">
+    <h2 class="header-secondary">Later</h2>
+    {% for task in tasks_later_my_order %} {% if task.task_type=="Later" %}
+    <div class="draggable task" id="{{task.id}}" draggable="true">
+      {{task.text}}
+    </div>
+    {% endif %} {% endfor %} {% for task in tasks_id %} {% if
+    task.task_type=="Later" %}
+    <div class="draggable task" id="{{task.id}}" draggable="true">
+      {{task.text}}
+    </div>
+    {% endif %} {% endfor %}
+  </div>
 </div>
 {% endblock %}
