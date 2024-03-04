@@ -75,3 +75,17 @@ document
       body: JSON.stringify(taskOrder),
     });
   });
+
+////////////////////////////////////////////////
+// 3. Set task as checked = done
+////////////////////////////////////////////////
+
+document.querySelectorAll(".task-checkbox").forEach(function (checkbox) {
+  checkbox.addEventListener("change", function () {
+    fetch("/update_task/" + this.id.replace("task-checkbox-", ""), {
+      method: "PUT",
+    }).then(function () {
+      location.reload();
+    });
+  });
+});

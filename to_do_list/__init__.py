@@ -20,15 +20,16 @@ from to_do_list.models import Task
 @app.route('/', methods=['GET', 'POST'])
 def index():
     index_page = True
-    tasks_id = Task.query.filter_by(my_order=0).order_by(Task.id)
-    tasks_today_my_order = Task.query.filter_by(task_type="Today").except_(Task.query.filter_by(my_order=0)).order_by(Task.my_order)
-    tasks_week_my_order = Task.query.filter_by(task_type="This week").except_(Task.query.filter_by(my_order=0)).order_by(Task.my_order)
-    tasks_later_my_order = Task.query.filter_by(task_type="Later").except_(Task.query.filter_by(my_order=0)).order_by(Task.my_order)
+    tasks_id = Task.query.filter_by(my_order=0, checked=False).order_by(Task.id)
+    tasks_today_my_order = Task.query.filter_by(task_type="Today", checked=False).except_(Task.query.filter_by(my_order=0)).order_by(Task.my_order)
+    tasks_week_my_order = Task.query.filter_by(task_type="This week", checked=False).except_(Task.query.filter_by(my_order=0)).order_by(Task.my_order)
+    tasks_later_my_order = Task.query.filter_by(task_type="Later", checked=False).except_(Task.query.filter_by(my_order=0)).order_by(Task.my_order)
+    tasks_completed = Task.query.filter_by(checked=True).order_by(Task.id)
     check_form = CheckForm()
     if check_form.validate_on_submit:
         print(f"check_form.checkbox.data {check_form.checkbox.data}")
 
-    return render_template('index.html',index_page=index_page, tasks_id=tasks_id, tasks_today_my_order=tasks_today_my_order,tasks_week_my_order=tasks_week_my_order, tasks_later_my_order=tasks_later_my_order, check_form=check_form)
+    return render_template('index.html',index_page=index_page, tasks_id=tasks_id, tasks_today_my_order=tasks_today_my_order,tasks_week_my_order=tasks_week_my_order, tasks_later_my_order=tasks_later_my_order, tasks_completed=tasks_completed, check_form=check_form)
 
 @app.route('/add_task', methods=['GET', 'POST'])
 def add_task():
@@ -62,5 +63,12 @@ def save_order():
             task = Task.query.get(task_id)
             task.my_order = index
             task.task_type = group_to_task_type[group]
+    db.session.commit()
+    return '', 204
+
+@app.route('/update_task/<int:task_id>', methods=['PUT'])
+def update_task(task_id):
+    task = Task.query.get(task_id)
+    task.checked = not task.checked
     db.session.commit()
     return '', 204
