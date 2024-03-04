@@ -28,7 +28,13 @@ cd <project-directory>
 pip install -r requirements.txt
 ```
 
-4. Run the application:
+4. Create database:
+
+```sh
+python create_database.py
+```
+
+5. Run the application:
 
 ```sh
 python app.py
