@@ -1,9 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, StringField, RadioField, SubmitField
-
-class CheckForm(FlaskForm):
-
-    checkbox = BooleanField()
+from wtforms import StringField, RadioField, SubmitField
 
 class AddTaskForm(FlaskForm):
     text = StringField("Task: ")
