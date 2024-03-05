@@ -64,7 +64,7 @@ body {
 }
 
 /* *********************************** */
-/* GENERAL REUSABLE COMPONENTS */
+/* Section Navigation */
 /* *********************************** */
 
 .section-navigation {
@@ -108,7 +108,9 @@ body {
   transform: scale(1.3);
 }
 
+/* *********************************** */
 /* Index page */
+/* *********************************** */
 
 .container {
   max-width: 120rem;
@@ -177,7 +179,9 @@ body {
   accent-color: #777;
 }
 
+/* *********************************** */
 /* Add task form */
+/* *********************************** */
 
 .add-task-form {
   font-size: 1.6rem;
