@@ -13,7 +13,7 @@ This was my first project and, while I'm proud of what I accomplished, I recogni
 1. Clone the repository:
 
 ```sh
-git clone <repository-url>
+git clone git@github.com:TomKanci/learning-projects--to-do-list.git
 ```
 
 2. Navigate to the project directory:
